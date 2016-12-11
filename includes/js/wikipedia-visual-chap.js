@@ -574,8 +574,6 @@
 			console.log('box has no assigned width css class!!! (wvc-box-extended OR wvc-box-pocket)');
 		    }  
 		}
-
-		
 	    }
 	    /* get content's original width and resize */
 	    var contentPrevWidth = content.outerWidth(),

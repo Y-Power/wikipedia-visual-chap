@@ -37,96 +37,87 @@ load_plugin_textdomain('wikipedia-visual-chap', false, basename( dirname( __FILE
 // main class
 if ( ! class_exists( 'Wikipedia_Visual_Chap' ) ) {
     class Wikipedia_Visual_Chap
-    {
+{
 	private $wvc_options;
 	private $wvc_default_values;
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-            // launch
-            add_action( 'wp_enqueue_scripts', array( $this, 'register_files' ) );
-            // if front-end
-            if ( ! is_admin() ){
-		add_action( 'loop_start', array( $this, 'launcher' ) );
-            }
-            // if back-end
-            else {
-		add_action( 'wp_loaded', array( $this, 'admin_panel' ) );
-            }
+        // launch
+        add_action( 'wp_enqueue_scripts', array( $this, 'register_files' ) );
+        // if front-end
+        if ( ! is_admin() ){
+            add_action( 'loop_start', array( $this, 'launcher' ) );
+        }
+        // if back-end
+        else {
+            add_action( 'wp_loaded', array( $this, 'admin_panel' ) );
+        }
 	}
 
-	// register files
-	public function register_files() {
-            // page css
-            wp_register_style( 'wikipedia-visual-chap-icons', plugins_url() . '/wikipedia-visual-chap/assets/font-awesome-4.7.0/css/font-awesome.min.css' ); // "Font Awesome by Dave Gandy - http://fontawesome.io"
-            wp_register_style( 'wikipedia-visual-chap-main', plugins_url() .  '/wikipedia-visual-chap/includes/css/wikipedia-visual-chap.css' );
+    // register files
+    public function register_files() {
+        if ( is_admin() ){
             // admin css
             wp_register_style( 'wikipedia-visual-chap-admin', plugins_url() .  '/wikipedia-visual-chap/includes/css/wikipedia-visual-chap-admin.css' );
-            if ( is_page() ){
-		// page js enqueue
-		wp_enqueue_script( 'wikipedia-visual-chap-main-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap.js', array('jquery') );
-            }
-            else {
-		// page js register
-		wp_register_script( 'wikipedia-visual-chap-main-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap.js', array('jquery') );
-            }
             // admin js
             wp_register_script( 'wikipedia-visual-chap-admin-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap-admin.js', array('jquery') );
-	}
+        }
+    }
 
-	// main launcher
-	public function launcher() {
-            // conditional checks - add all checks here
-            if ( is_single() ){
-		require_once dirname( __FILE__ ) . '/includes/wvc-html.php';
-		// content filter
-		add_filter( 'the_content', 'wikipedia_visual_chap_main_html' );
-		// footer files
-		add_action( 'wp_footer', array( 'wikipedia_visual_chap', 'enqueue_files' ) );
-            }
-	}
+    // main launcher
+    public function launcher() {
+        // conditional checks - add all checks here
+        if ( is_single() ){
+            require_once dirname( __FILE__ ) . '/includes/wvc-html.php';
+            // content filter
+            add_filter( 'the_content', 'wikipedia_visual_chap_main_html' );
+            // footer files
+            add_action( 'wp_footer', array( 'wikipedia_visual_chap', 'enqueue_files' ) );
+        }
+    }
 
-	// include files
-	public static function enqueue_files() {
-            // css
-            wp_enqueue_style( 'wikipedia-visual-chap-icons' );
-            wp_enqueue_style( 'wikipedia-visual-chap-main' );
-            // js
-            wp_enqueue_script( 'wikipedia-visual-chap-main-js' );
-            // options array for JS - front only
-            $wvc_wp_options_array = array(
-		'wvcColor' => get_option('wikipedia-visual-chap-options-color', '#f8f8f8'),
-		'wvcBackgroundColor' => get_option('wikipedia-visual-chap-options-background-color', '#333333'),
-		'wvcUnderlineColor' => get_option('wikipedia-visual-chap-options-underline-color', '#FF0000'),
-		'wvcLinkColor' => get_option('wikipedia-visual-chap-options-link-color', '#50C2E5'),
-		'wvcMarginTop' => get_option('wikipedia-visual-chap-options-margin-top', 0),
-		'wvcWordsFilter' => get_option('wikipedia-visual-chap-options-words-filter', ''),
-		'wvcWikiLink' => get_option('wikipedia-visual-chap-options-wiki-donate', 0),
-		'wvcDevLink' => get_option('wikipedia-visual-chap-options-dev', 0)
-            );
-            // export options to JS
-            wp_localize_script( 'wikipedia-visual-chap-main-js', 'WVCWPOptions', $wvc_wp_options_array );
-	}
+    // include files
+    public static function enqueue_files() {
+        // css
+        wp_enqueue_style( 'wikipedia-visual-chap-icons', plugins_url() . '/wikipedia-visual-chap/assets/font-awesome-4.7.0/css/font-awesome.min.css' ); // "Font Awesome by Dave Gandy - http://fontawesome.io"
+        wp_enqueue_style( 'wikipedia-visual-chap-main', plugins_url() .  '/wikipedia-visual-chap/includes/css/wikipedia-visual-chap.css' );
+        // js
+        wp_enqueue_script( 'wikipedia-visual-chap-main-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap.js', array('jquery') );
+        // options array for JS - front only
+        $wvc_wp_options_array = array(
+            'wvcColor' => get_option('wikipedia-visual-chap-options-color', '#f8f8f8'),
+            'wvcBackgroundColor' => get_option('wikipedia-visual-chap-options-background-color', '#333333'),
+            'wvcUnderlineColor' => get_option('wikipedia-visual-chap-options-underline-color', '#FF0000'),
+            'wvcLinkColor' => get_option('wikipedia-visual-chap-options-link-color', '#50C2E5'),
+            'wvcMarginTop' => get_option('wikipedia-visual-chap-options-margin-top', 0),
+            'wvcWordsFilter' => get_option('wikipedia-visual-chap-options-words-filter', ''),
+            'wvcWikiLink' => get_option('wikipedia-visual-chap-options-wiki-donate', 0),
+            'wvcDevLink' => get_option('wikipedia-visual-chap-options-dev', 0)
+        );
+        // export options to JS
+        wp_localize_script( 'wikipedia-visual-chap-main-js', 'WVCWPOptions', $wvc_wp_options_array );
+    }
 
 	// admin files
 	public function wikipedia_visual_chap_admin_files(){
-            if ( is_admin() ){
-		// admin css
-		wp_enqueue_style( 'wikipedia-visual-chap-admin', plugins_url() .  '/wikipedia-visual-chap/includes/css/wikipedia-visual-chap-admin.css' );
-		// admin js
-		wp_enqueue_script( 'wikipedia-visual-chap-admin-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap-admin.js', array('jquery') );
-            }
+        if ( is_admin() ){
+            // admin css
+            wp_enqueue_style( 'wikipedia-visual-chap-admin', plugins_url() .  '/wikipedia-visual-chap/includes/css/wikipedia-visual-chap-admin.css' );
+            // admin js
+            wp_enqueue_script( 'wikipedia-visual-chap-admin-js',  plugins_url() .  '/wikipedia-visual-chap/includes/js/wikipedia-visual-chap-admin.js', array('jquery') );
+        }
 	}
 
 	// create page
 	public function wikipedia_visual_chap_settings_page(){
-            // if user is NOT allowed
-            if ( ! current_user_can('manage_options') ) {
-		wp_die( esc_html__('You do not have sufficient permissions to access this page.', 'wikipedia-visual-chap') );
-            }
-            // create options page
-            add_options_page( 'Visual Chap settings', 'Visual Chap', 'manage_options', 'wikipedia-visual-chap-settings', array($this, 'wikipedia_visual_chap_admin_html') );
+        // if user is NOT allowed
+        if ( ! current_user_can('manage_options') ) {
+            wp_die( esc_html__('You do not have sufficient permissions to access this page.', 'wikipedia-visual-chap') );
+        }
+        // create options page
+        add_options_page( 'Visual Chap settings', 'Visual Chap', 'manage_options', 'wikipedia-visual-chap-settings', array($this, 'wikipedia_visual_chap_admin_html') );
 	}
 
 	// add html elements to admin screen
