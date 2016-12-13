@@ -348,7 +348,7 @@
 	wikipediaVisualChap.search = function(query){
 	    /* load waiting spinning loading icon */
 	    jQ('div#wikipedia-visual-chap-img-loading i').addClass('fa-spin');
-	    jQ('div#wikipedia-visual-chap-img-loading').removeClass('wvc-loading-image-standby').addClass('wvc-loading-image-active');
+	    jQ('div#wikipedia-visual-chap-img-loading').toggleClass('wvc-loading-image-active').toggleClass('wvc-loading-image-standby');
 	    jQ('div#wikipedia-visual-chap-img-loading').fadeIn(200);
 	    /* reset main img */
 	    jQ('img#wikipedia-visual-chap-display-image').attr('href', '');
@@ -463,7 +463,7 @@
 					jQ('img#wikipedia-visual-chap-display-image').wrap(imageLink);
 					if (photoLink === 'Undefined' || wikipediaVisualChap.results[0].warnings) {
 					    photoLink = 'img/Wikipedia-logo-v2.png';
-					    jQ('div#wikipedia-visual-chap-img-loading').removeClass('wvc-loading-image-active').addClass('wvc-loading-image-standby');
+					    jQ('div#wikipedia-visual-chap-img-loading').toggleClass('wvc-loading-image-active').toggleClass('wvc-loading-image-standby');
 					    /* reset image loading box */
 					    jQ('div#wikipedia-visual-chap-img-loading i').removeClass('fa-spin');
 					    jQ('div#wikipedia-visual-chap-img-loading').fadeOut(200);
@@ -477,7 +477,7 @@
 						}
 						/* reset image loading box */
 						jQ('div#wikipedia-visual-chap-img-loading i').removeClass('fa-spin');
-						jQ('div#wikipedia-visual-chap-img-loading').removeClass('wvc-loading-image-active').addClass('wvc-loading-image-standby');
+						jQ('div#wikipedia-visual-chap-img-loading').toggleClass('wvc-loading-image-active').toggleClass('wvc-loading-image-standby');
 						jQ('div#wikipedia-visual-chap-img-loading').fadeOut(200);
 					    });
 					}
