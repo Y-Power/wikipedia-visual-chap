@@ -58,7 +58,7 @@ div#wikipedia-visual-chap-box-switch:hover {
 img#wikipedia-visual-chap-box-logo {
     position: absolute;
     margin-top: 58px;
-    margin-left: -78px;
+    margin-left: -95px;
     padding: 3px;
     width: 40px;
     height: 40px;
@@ -190,7 +190,10 @@ img.wvc-img-active {
 }
 
 .wvc-box-active {
-    background-image: url('../../assets/img/Wikipedia-logo-v2.svg');
+    /*
+-- TO FINISH!!! -- WP options for GNU background logo 
+background-image: url('https://www.gnu.org/graphics/official%20gnu.svg');
+   */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
