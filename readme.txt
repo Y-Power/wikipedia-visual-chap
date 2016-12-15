@@ -4,7 +4,7 @@ Donate link: http://visualchap.nouveausiteweb.fr/donate/
 Tags: content, wikipedia, search, jquery, ajax
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,8 +51,8 @@ No answer is a good answer to the foo bar dilemma.
 
 == Screenshots ==
 
-1. /assets/visual-chap-screenshot-1
-2. /assets/visual-chap-screenshot-2
+1. /assets/screenshot-1
+2. /assets/screenshot-2
 
 == Changelog ==
 
