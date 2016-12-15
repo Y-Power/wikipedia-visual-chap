@@ -56,6 +56,9 @@ No answer is a good answer to the foo bar dilemma.
 
 == Changelog ==
 
+= 1.0.0 =
+* First WordPress release.
+
 = 0.1 =
 * First release.
 
@@ -63,6 +66,9 @@ No answer is a good answer to the foo bar dilemma.
 * Finished front and back GUIs
 
 == Upgrade Notice ==
+
+= 1.0.0 =
+First WordPress release.
 
 = 0.1 =
 First release.
